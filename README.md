@@ -40,24 +40,25 @@ Raspberry Pi (RPi) button shutdown python3 script. The button shuts down RPi saf
   ```
   cd rpishutdowndetector
   ```
-4. Copy the shutdowndtector.service file into **/etc/systemd/system/** directory.
+5. Copy the shutdowndtector.service file into **/etc/systemd/system/** directory.
   ```
-  sudo cp shutdowndtector.service /etc/systemd/system/shutdowndtector.service
+  sudo cp shutdowndetector.service /etc/systemd/system/
   ```
 5. Start and enable the shutdowndetector.service.
   ```
-  sudo systemctl start shutdowndetector.service
+  sudo systemctl daemon-reload
   sudo systemctl enable shutdowndetector.service
   ```
-6. Press the tacticle button longer than 3 seconds. RPi should shutdown.
-7. Keep the outlet connected, press the tacticle button again when RPi is in shutdown state. The power is on and RPI boots.
-8. Execute `systemctl` and confirm shutdowndetector.service is loaded, active and running.
+6. Reboot RPi.
+7. Execute `systemctl` and confirm shutdowndetector.service is loaded, active and running.
   ```
   systemctl
 
   UNIT                        LOAD   ACTIVE SUB       DESCRIPTION              
   shutdowndetector.service    loaded active running   Button shutdown detector  
   ```
+8. Press the tacticle button longer than 3 seconds. RPi should shutdown.
+9. Keep the outlet connected, press the tacticle button again when RPi shutdown completely. The button powers on the system and RPi boots.
 
 
 
