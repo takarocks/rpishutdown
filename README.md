@@ -1,8 +1,8 @@
 # RPi Button Shutdown and Boot
 Raspberry Pi (RPi) button shutdown python3 script. The button shuts down RPi safely by executing `sudo shutdown -h now` command if the button is keep pressed more than 3 seconds. This button also works as RPi power on if the power outlet is connected and RPi is in shutdown state. You do not need to unplug/plug power outlet.
 
-* Version 0.1
-* December 29, 2020
+* Version 0.2
+* January 4, 2021
 * Taka Kitazume
 
 
@@ -24,11 +24,11 @@ Raspberry Pi (RPi) button shutdown python3 script. The button shuts down RPi saf
 ## Setup
 
 1. Assemble your kit as you see in the diagram. You must use GPIO3 for one side of the tacticle button. You can use any ground pin.
-2. Create **services** directory under `pi` user home directory, move to that directory.
+2. Create **services/shutdowndetector** directory under `pi` user home directory, move to that directory.
   ```
   cd ~
-  mkdir services
-  cd services
+  mkdir -p services/shutdowndetector
+  cd services/shutdowndetector
   ```
 3. Git clone this project
   ```
