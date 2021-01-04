@@ -9,6 +9,8 @@ Raspberry Pi (RPi) button shutdown python3 script. The button shuts down RPi saf
 ## Prerequisites
 
 * Raspberry Pi (2, 3B, 3B+, Zero) x 1
+  * Raspberry Pi OS (Lite)
+  * git
 * Tacticle button x 1
 * Resister 330Ω~680Ω x 1
 * Breadboard x 1
@@ -24,15 +26,19 @@ Raspberry Pi (RPi) button shutdown python3 script. The button shuts down RPi saf
 ## Setup
 
 1. Assemble your kit as you see in the diagram. You must use GPIO3 for one side of the tacticle button. You can use any ground pin.
-2. Create **services/shutdowndetector** directory under `pi` user home directory, move to that directory.
+2. Create **services** directory under `pi` user home directory, move to that directory.
   ```
   cd ~
-  mkdir -p services/shutdowndetector
-  cd services/shutdowndetector
+  mkdir services
+  cd services
   ```
 3. Git clone this project
   ```
   git clone https://github.com/takarocks/rpishutdowndetector.git
+  ```
+4. Change to project directory `rpishutdowndetector`
+  ```
+  cd rpishutdowndetector
   ```
 4. Copy the shutdowndtector.service file into **/etc/systemd/system/** directory.
   ```
