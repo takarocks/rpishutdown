@@ -1,8 +1,9 @@
 # RPi Button Shutdown and Boot
 Raspberry Pi (RPi) button shutdown python3 script. The button shuts down RPi safely by executing `sudo shutdown -h now` command if the button is keep pressed more than 3 seconds. This button also works as RPi power on if the power outlet is connected and RPi is in shutdown state. You do not need to unplug/plug power outlet.
+If you have adafruit_ssd1306 compatible I2C display, shutdown message can be seen through the LCD.
 
 * Version 0.2
-* January 4, 2021
+* March 1, 2021
 * Taka Kitazume
 
 
@@ -12,10 +13,9 @@ Raspberry Pi (RPi) button shutdown python3 script. The button shuts down RPi saf
   * Raspberry Pi OS (Lite)
   * git
 * Tacticle button x 1
-* Resister 330Ω~680Ω x 1
 * Breadboard x 1
 * Jumper wires Male/Female x 2
-
+* (Optional) SSD1306 I2C display
 
 ## Diagram
 <kbd>
@@ -40,25 +40,29 @@ Raspberry Pi (RPi) button shutdown python3 script. The button shuts down RPi saf
   ```
   cd rpishutdowndetector
   ```
-5. Copy the shutdowndtector.service file into **/etc/systemd/system/** directory.
+5. (Optional) If you have SSD1306 display connected, modify shutdowndetechtor.py, change following SSD1306 in line 18 to True.
+  ```
+  SSD1306 = True
+  ```
+6. Copy the shutdowndtector.service file into **/etc/systemd/system/** directory.
   ```
   sudo cp shutdowndetector.service /etc/systemd/system/
   ```
-5. Start and enable the shutdowndetector.service.
+7. Start and enable the shutdowndetector.service.
   ```
   sudo systemctl daemon-reload
   sudo systemctl enable shutdowndetector.service
   ```
-6. Reboot RPi.
-7. Execute `systemctl` and confirm shutdowndetector.service is loaded, active and running.
+8. Reboot RPi.
+9. Execute `systemctl` and confirm shutdowndetector.service is loaded, active and running.
   ```
   systemctl
 
   UNIT                        LOAD   ACTIVE SUB       DESCRIPTION              
   shutdowndetector.service    loaded active running   Button shutdown detector  
   ```
-8. Press the tacticle button longer than 3 seconds. RPi should shutdown.
-9. Keep the outlet connected, press the tacticle button again when RPi shutdown completely. The button powers on the system and RPi boots.
+10. Press the tacticle button longer than 3 seconds. RPi should shutdown.
+11. Keep the outlet connected, press the tacticle button again when RPi shutdown completely. The button powers on the system and RPi boots.
 
 
 
