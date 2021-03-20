@@ -15,7 +15,7 @@ import requests
 
 PIN_SHUTDOWN = 3
 BUTTON_SECONDS = 3
-SSD1306 = True
+SSD1306 = False
 
 GPIO.setmode(GPIO.BCM)
 # Do not set pull_up_down parameter if PIN 3 is used as a physical pull up resistor is fitted
