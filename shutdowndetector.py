@@ -4,16 +4,18 @@
 # RPi button shutdown detector
 #
 # Taka Kitazume
-# Version 0.1
-# December 29, 2020
+# Version 0.2
+# March 1, 2021
 #######################################
 
 import RPi.GPIO as GPIO
 import time
 import os
+import requests
 
 PIN_SHUTDOWN = 3
 BUTTON_SECONDS = 3
+SSD1306 = False
 
 GPIO.setmode(GPIO.BCM)
 # Do not set pull_up_down parameter if PIN 3 is used as a physical pull up resistor is fitted
@@ -38,6 +40,16 @@ def shutdown(channel):
         current = time.monotonic_ns()/1000000000
         state=GPIO.input(channel)
 
+        print("inside while loop, GPIO.input(channel) = {}".format(GPIO.input(channel)))
+
+        if SSD1306:
+            sec = round(end - current)
+            if sec < 0:
+                sec = 0
+            text = "Shutdown in {} seconds".format(sec)
+            r = requests.get('http://localhost:5000/showmessage?text=' + text)
+            time.sleep(1.1)
+
         # print('UPDATED = {}'.format(current))
         # print('STATE   = {}'.format(state))
         # time.sleep(0.5)
@@ -47,7 +59,12 @@ def shutdown(channel):
         print('Shutdown process starts now.')
         os.system('sudo shutdown -h now')
     else:
-        print('Shutdown process cancelled.')
+        text = 'Shutdown cancelled.'
+        print(text)
+        if SSD1306:
+            r = requests.get('http://localhost:5000/showmessage?text=' + text)
+            time.sleep(1)
+            r = requests.get('http://localhost:5000/showmessage?text= ')
 
 GPIO.add_event_detect(PIN_SHUTDOWN, GPIO.FALLING, callback=shutdown, bouncetime=BUTTON_SECONDS * 1000)
 

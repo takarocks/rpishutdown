@@ -1,5 +1,7 @@
 [Unit]
 Description=Button shutdown detector
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 ExecStart=/usr/bin/python3 -u shutdowndetector.py
