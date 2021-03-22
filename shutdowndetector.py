@@ -56,7 +56,10 @@ def shutdown(channel):
 
     # Now check the state and if 0, then shutdown the device
     if state == 0:
-        print('Shutdown process starts now.')
+        text = 'Shutdown process starts now.'
+        print(text)
+        if SSD1306:
+            r = requests.get('http://localhost:5000/showmessage?text=' + text)
         os.system('sudo shutdown -h now')
     else:
         text = 'Shutdown cancelled.'
