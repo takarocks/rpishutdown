@@ -36,6 +36,11 @@ If you have adafruit_ssd1306 compatible I2C display, shutdown message can be see
   ```
   git clone https://github.com/takarocks/rpishutdowndetector.git
   ```
+  If you don't have git yet, please install and try again.
+  ```
+  sudo apt install git
+  ```
+
 4. Change to project directory `rpishutdowndetector`
   ```
   cd rpishutdowndetector
